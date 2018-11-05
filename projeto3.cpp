@@ -28,12 +28,12 @@ class Graph{
         list<int> professor, info_escola;
         list<string> escolas;
         ifstream file("entrada.txt");
-        int i, j, prof_number, habilitacao, vagas, aux;
+        int i, j, prof_number, habilitacao, vagas, aux, esc = 0;
         char char_aux;
 
         while (getline(file, line)){
             line.push_back('\n');
-            if(line.size() <= 36 && line.size() > 14){
+            if(line.size() <= 36 && line.size() > 18){ 
                 i=2;
                 j=0;
                 while(line[i] != ','){
@@ -60,7 +60,6 @@ class Graph{
                 do{
                     // cout << line[i] << "\n";
                     if(line[i] != ',' && line[i] != ')'){
-                        cout << "entrei nessa merda\n";
                         // escola[j] += line[i];
                         i++;
                         j++;
@@ -90,29 +89,42 @@ class Graph{
                 professor.clear();
                 escolas.clear();
             }
-            else if(line.size() < 15){
+            else if(line.size() < 19){
                 i=1;
                 j=0;
-                // cout << line[i] << "\n";
                 while(line[i] != '\n'){
                     if(line[i] != ')'){
                         j++;
+                        if(j > 4){
+                            j = 2;
+                        }
                     }
                     else{
                         escola = line.substr(1, j);
+                        esc++;
                         assignments_escolas[escola] = {};
-                        // cout << escola << "\n";
                         i+=3;
                         number = line.substr(i, 1);
                         habilitacao = stoi(number);
-                        // cout << habilitacao << "\n";
                         info_escola.push_back(habilitacao);
 
                         i+=4;
                         number = line.substr(i, 1);
+                        
+                        if(esc < 10){
+                            vagas = 1;
+                        }
+                        else{
+                            vagas = 2;
+                        }
                         vagas = stoi(number);
+                        if(i > 10){
+                            i=16;
+                            number = line[i-1];
+                            vagas = stoi(number);
+                            i--;
+                        }
                         total_vagas+=vagas;
-                        cout << "Vagas: " << vagas << "\n";
                         info_escola.push_back(vagas);
 
                         escolas_contratantes[escola] = info_escola;
