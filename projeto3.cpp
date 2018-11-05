@@ -47,7 +47,7 @@ class Graph{
                 i+=2;
                 number = line[i];
                 habilitacao = stoi(number);
-                // cout << habilitacao << "\n";
+                // cout << habilitacao << "\n" << endl;
                 professor.push_back(habilitacao);
                 assignments_professores[professor] = "";
 
@@ -60,7 +60,7 @@ class Graph{
                 do{
                     // cout << line[i] << "\n";
                     if(line[i] != ',' && line[i] != ')'){
-                        // cout << "entrei nessa merda\n";
+                        cout << "entrei nessa merda\n";
                         // escola[j] += line[i];
                         i++;
                         j++;
@@ -110,7 +110,7 @@ class Graph{
 
                         i+=4;
                         number = line.substr(i, 1);
-                        vagas = stoi+(number);
+                        vagas = stoi(number);
                         total_vagas+=vagas;
                         cout << "Vagas: " << vagas << "\n";
                         info_escola.push_back(vagas);
